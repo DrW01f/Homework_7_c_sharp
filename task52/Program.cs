@@ -1,10 +1,10 @@
-﻿// Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном 
-//массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.
+﻿// Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое 
+// элементов в каждом столбце.
 // Например, задан массив:
 // 1 4 7 2
 // 5 9 2 3
 // 8 4 2 4
-// 17 -> такого числа в массиве нет
+// Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 
 int[] InputFunc()
 {
@@ -18,7 +18,7 @@ int[] InputFunc()
     return parametrs;
 }
 
-int[,] GetArray(int[] parametrs, int minValue = -50, int maxValue = 50)
+int[,] GetArray(int[] parametrs, int minValue = -10, int maxValue = 10)
 {
     int[,] result = new int[parametrs[0], parametrs[1]];
     for (int i = 0; i < parametrs[0]; i++)
@@ -30,7 +30,6 @@ int[,] GetArray(int[] parametrs, int minValue = -50, int maxValue = 50)
     }
     return result;
 }
-
 
 void PrintArray(int[,] inArray)
 {
@@ -44,15 +43,23 @@ void PrintArray(int[,] inArray)
     }
 }
 
-string FindElement(int[,] array)
+void AverageFind(int[,] array)
 {
-    Console.WriteLine("Введите номер строки: ");
-    int i = int.Parse(Console.ReadLine()!);
-    Console.WriteLine("Введите номер столбца: ");
-    int j = int.Parse(Console.ReadLine()!);
-    return (i <= array.GetLength(0) && j <= array.GetLength(1)) ?
-    ("Искомый элемент: " + array[i - 1, j - 1].ToString()) : "Такого элемента нет";
+    Console.Write("Среднее арифметическое каждого столбца: ");
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+        double avarage = 0;
+        double summ = 0; // С каждой задачей питон кажется все более идеальным языком, если 
+//результат деления автоматом не ставится как double(float) >=(
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            summ += array[i, j];
+        }
+        avarage = summ / array.GetLength(0);
+        Console.Write($"{avarage:F2}; ");
+    }
 }
+
 
 void Main()
 {
@@ -60,8 +67,7 @@ void Main()
     int[] arrayRowCol = InputFunc();
     int[,] array = GetArray(arrayRowCol);
     PrintArray(array);
-    string answer = FindElement(array);
-    Console.WriteLine(answer);
+    AverageFind(array);
 }
 
 Main();
