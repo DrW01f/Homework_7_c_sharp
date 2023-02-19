@@ -20,15 +20,14 @@ int[] InputFunc()
 
 double[,] GetArray(int[] array)
 {
-
     double[,] twodimensionalArray = new double[array[0], array[1]];
     for (int i = 0; i < array[0]; i++)
     {
         for (int j = 0; j < array[1]; j++)
-        {
-            twodimensionalArray[i, j] = Math.Round((new Random().NextDouble() * Math.Pow(10, new Random().Next(0, 3)) * new Random().Next(-5, 5)), 2);
+        {   //для создания отрицательных чисел использовал new Random().Next(-10, 11)
+            twodimensionalArray[i, j] = Math.Round((new Random().NextDouble() *
+            Math.Pow(10, new Random().Next(0, 3)) * new Random().Next(-10, 11)), 2);
         }
-
     }
     return twodimensionalArray;
 }
@@ -53,7 +52,6 @@ void Main()
     int[] arrayRowCol = InputFunc();
     double[,] array = GetArray(arrayRowCol);
     PrintArray(array);
-
 }
 
 Main();
