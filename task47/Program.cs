@@ -6,3 +6,54 @@
 // 8 7,8 -7,1 9
 
 
+int[] InputFunc()
+{
+    int[] parametrs = new int[2];
+    Console.WriteLine("Введите кол-во строк");
+    int row = int.Parse(Console.ReadLine()!);
+    Console.WriteLine("Введите кол-во столбцов");
+    int col = int.Parse(Console.ReadLine()!);
+    parametrs[0] = row;
+    parametrs[1] = col;
+    return parametrs;
+}
+
+double[,] GetArray(int[] array)
+{
+
+    double[,] twodimensionalArray = new double[array[0], array[1]];
+    for (int i = 0; i < array[0]; i++)
+    {
+        for (int j = 0; j < array[1]; j++)
+        {
+            twodimensionalArray[i, j] = Math.Round((new Random().NextDouble() * Math.Pow(10, new Random().Next(0, 3)) * new Random().Next(-5, 5)), 2);
+        }
+
+    }
+    return twodimensionalArray;
+}
+
+void PrintArray(double[,] array)
+{
+    int row = array.GetLength(0);
+    int col = array.GetLength(1);
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            Console.Write($"{array[i, j]}\t ");
+        }
+        Console.WriteLine();
+    }
+}
+
+void Main()
+{
+    Console.Clear();
+    int[] arrayRowCol = InputFunc();
+    double[,] array = GetArray(arrayRowCol);
+    PrintArray(array);
+
+}
+
+Main();
